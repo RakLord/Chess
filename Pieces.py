@@ -10,13 +10,11 @@ class Piece:
         self.position = position
         self.symbol = (self.__class__.__name__[0] if color == 'b' else self.__class__.__name__[0].lower())
 
-    def move(self, board, new_pos):
+    def move(self, new_pos):
         old_pos = self.position
         self.history.append(old_pos)
         self.position = new_pos
-        board[new_pos.y][new_pos.x] = self
-        board[old_pos.y][old_pos.x] = None
-
+        return old_pos, new_pos
 
 
     def get_legal_moves(self, board, position):

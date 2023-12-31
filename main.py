@@ -43,9 +43,13 @@ class ChessBoard:
                     # print("{}: {}".format(piece.symbol, piece.legal_moves))
 
     def move_piece(self, piece, new_pos):
-        piece.move(self.board, new_pos)
+        update = piece.move(new_pos)
+        print(update)
+        chess_board.board[update[1].y][update[1].x] = piece
+        chess_board.board[update[0].y][update[0].x] = None
+        chess_board.update_board()
+        chess_board.print_board()
         print(piece.__dict__)
-
 
 
 chess_board = ChessBoard()
@@ -54,16 +58,11 @@ chess_board.update_board()
 
 bishop1 = get_piece(chess_board.board, V2(2, 0))            # Select Bishop
 
-chess_board.move_piece(bishop1, bishop1.legal_moves[0])     # Move Bishop
-chess_board.update_board()                                  # Update Board
-chess_board.print_board()
+while True:
+    chess_board.move_piece(bishop1, bishop1.legal_moves[0])     # Move Bishop
+    print("\n")
+    input("Enter")
+    print("\n")
 
-chess_board.move_piece(bishop1, bishop1.legal_moves[0])     # Move Bishop
-chess_board.update_board()                                  # Update Board
-chess_board.print_board()
-
-chess_board.move_piece(bishop1, bishop1.legal_moves[0])     # Move Bishop
-chess_board.update_board()                                  # Update Board
-chess_board.print_board()
 
 # print(get_piece(chess_board.board, V2(3, 3)))
